@@ -7,7 +7,7 @@ from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 from googleapiclient.errors import HttpError
 from google.oauth2.service_account import Credentials
 
-from msdatabase.logging_config import get_logger
+from msdatabase.logger_config import get_logger
 
 class GoogleDriveHandler:
     def __init__(self) -> None:
