@@ -10,7 +10,11 @@ python = "^3.12"
 google-auth = "^2.36.0"
 google-api-python-client = "^2.153.0"
 google-auth-oauthlib = "^1.2.1"
+sqlalchemy = "^2.0.36"
 
+
+[tool.poetry.group.dev.dependencies]
+cython = "^3.0.11"
 
 [build-system]
 requires = ["poetry-core"]
