@@ -1,7 +1,23 @@
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import Session
 
 engine = create_engine("sqlite+pysqlite:///:memory:", echo=True)
+metadata_obj = MetaData()
+user_table = Table(
+    "user_account",
+    metadata_obj,
+    Column("id", Integer, primary_key=True),
+    Column("name", String(30)),
+    Column("fullname", String),
+)
+
+address_table = Table(
+    "address",
+    metadata_obj,
+    Column("id", Integer, primary_key=True),
+    Column("user_id", ForeignKey("user_account.id"), nullable=False),
+    Column("email_address", String, nullable=False),
+)
 
 with engine.connect() as conn:
     result = conn.execute(text("CREATE TABLE some_table (x int, y int)"))
@@ -46,3 +62,5 @@ with Session(engine) as session:
         [{"x": 9, "y": 11}, {"x": 13, "y": 15}],
     )
     session.commit()
+print("#######################################################################")
+metadata_obj.create_all(engine)
